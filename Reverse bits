@@ -1,0 +1,17 @@
+public class Solution {
+    public int reverseBits(int n) {
+        n = (n >>> 16) | (n << 16);  // Swap the first and second 16 bits
+        n = ((n & 0x00FF00FF) << 8) | ((n & 0xFF00FF00) >>> 8);  // Swap 8-bit groups
+        n = ((n & 0x0F0F0F0F) << 4) | ((n & 0xF0F0F0F0) >>> 4);  // Swap 4-bit groups
+        n = ((n & 0x33333333) << 2) | ((n & 0xCCCCCCCC) >>> 2);  // Swap 2-bit groups
+        n = ((n & 0x55555555) << 1) | ((n & 0xAAAAAAAA) >>> 1);  // Swap 1-bit groups
+        return n;
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        
+        int input1 = 0b00000010100101000001111010011100;
+        System.out.println(sol.reverseBits(input1));  // Output: 964176192
+        
+        int input2 = 0b11111111111111111111111111111101;
