@@ -1,0 +1,31 @@
+public class Solution {
+    private static final int MOD = 1337;
+
+    private int modPow(int x, int y) {
+        int result = 1;
+        x %= MOD; 
+        
+        for (int i = 0; i < y; i++) {
+            result = (result * x) % MOD;
+        }
+        return result;
+    }
+
+    public int superPow(int a, int[] b) {
+        a %= MOD; 
+        int result = 1;
+        
+        for (int digit : b) {
+            result = modPow(result, 10) * modPow(a, digit) % MOD;
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        
+        System.out.println(sol.superPow(2, new int[]{3}));        // Output: 8
+        System.out.println(sol.superPow(2, new int[]{1, 0}));     // Output: 1024
+        System.out.println(sol.superPow(1, new int[]{4,3,3,8,5,2})); // Output: 1
+    }
+}
